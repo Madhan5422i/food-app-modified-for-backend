@@ -15,8 +15,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path={`${base_name}`} element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/Order" element={<PlaceOrder />} />
+          <Route path={`${base_name}cart`} element={<Cart />} />
+          <Route path={`${base_name}Order`} element={<PlaceOrder />} />
         </Routes>
       </div>
     </>
