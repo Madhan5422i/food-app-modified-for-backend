@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import "./index.css";
 import Navbar from "./components/Navbar/Navbar";
@@ -10,7 +10,7 @@ import PlaceOrder from "./pages/placeOrder/placeOrder";
 function App() {
   const base_name = "/food-app-modified-for-backend/";
   return (
-    <Router>
+    <>
       <div className="app">
         <Navbar />
         <Routes>
@@ -19,9 +19,8 @@ function App() {
           <Route path="/Order" element={<PlaceOrder />} />
         </Routes>
       </div>
-    </Router>
+    </>
   );
 }
-
 
 export default App;
