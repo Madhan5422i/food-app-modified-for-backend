@@ -9,7 +9,7 @@ import PlaceOrder from "./pages/placeOrder/placeOrder";
 
 function App() {
   return (
-    <Router basename="/food-app-modified-for-backend-">
+    <Router basename="/food-app-modified-for-backend">
       <div className="app">
         <Navbar />
         <Routes>
