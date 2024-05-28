@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "./index.css";
 import Navbar from "./components/Navbar/Navbar";
@@ -8,12 +8,13 @@ import PlaceOrder from "./pages/placeOrder/placeOrder";
 // import Footer from "./components/Footer/footer";
 
 function App() {
+  const base_name = "/food-app-modified-for-backend/";
   return (
-    <Router basename="/food-app-modified-for-backend/">
+    <Router>
       <div className="app">
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path={`${base_name}`} element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/Order" element={<PlaceOrder />} />
         </Routes>
