@@ -1,0 +1,159 @@
+.cart-container{
+    display: flex;
+    gap: 3rem;
+    margin-top: 20px;
+    padding-bottom: 100px;
+}
+
+/* .title-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    margin-top: 20px;
+} */
+.cart-container hr{
+    height: 3px;
+    background-color: gray;
+    border: none;
+}
+.items-container .single-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.338);
+    border-radius: 20px;
+    overflow: hidden;
+    gap: 100px;
+}
+
+.item-image{
+    width: 90px;
+    object-fit: contain;
+}
+.x-image{
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.part-1 img{
+    height: auto;
+    width: 200px;
+}
+.part-1{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 370px;
+}
+.part-1-details{
+    max-width: 150px;
+}
+
+.part-1-details h2{
+    color: chocolate;
+}
+.part-1-details p{
+    font-weight: 700;
+}
+.part-1-details p span{
+    color: chocolate;
+}
+.quantity{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 800;
+}
+
+.quantity span{
+    color: chocolate;
+    font-weight: 800;
+}
+.tot-price{
+    font-size: x-large;
+    font-weight: bold;
+}
+.grnd{
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+.grnd span{
+    color: tomato;
+    font-family: serif;
+}
+
+
+
+.continue{
+    position: fixed;
+    right: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-top: 90px;
+    padding: 50px;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.338);
+}
+
+.promo input,button{
+    border: none;
+}
+.promo input{
+    padding: 10px;
+    font-weight: 800;
+    max-width: 170px;
+}
+
+.promo{
+    border: 1px solid ;
+    width: fit-content;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.promo button{
+    padding: 16px 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 900;
+    font-size: large;
+    background-color: tomato;
+    color: white;
+    height: 100%;
+    cursor: pointer;
+    max-width: 150px;
+}
+.promo button:active{
+    background-color: rgba(255, 99, 71, 0.681);
+}
+.promo input:focus{
+    border: none;
+    outline: none;
+}
+.continue-btn{
+    padding: 16px 20px;
+    border: 2px solid transparent;
+    background-color: tomato;
+    color: white;
+    font-weight: 800;
+    font-size: larger;
+    font-family:Arial, Helvetica, sans-serif;
+    border-radius: 20px;
+    cursor: pointer;
+
+}
+.continue-btn:active{
+    background-color: rgba(255, 99, 71, 0.681);
+}
+
+.amt{
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+.amt h3,h2{
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+}

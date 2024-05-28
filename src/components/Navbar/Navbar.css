@@ -1,0 +1,49 @@
+.navbar{
+    display: flex;
+    margin: 10px;
+    justify-content: space-around;
+    padding: 20px;
+}
+.list-items,
+.icons {
+    display: flex;
+    gap: 40px;
+    font-size: larger;
+    align-items: center;
+
+    
+    
+}
+
+.icons img {
+    height: 25px;
+}
+.icons button{
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 2px solid orange;
+    border-radius: 20px;
+    cursor:  pointer;
+    font-weight: 600;
+    transition: 0.4s;
+}
+
+.icons button:hover{
+    background-color: antiquewhite;
+}
+.list-items .active{
+    padding-bottom: 2px;
+    border-bottom: 3px solid black;
+}
+.icons{
+    position: relative;
+}
+.dot{
+    position: absolute;
+    min-height: 10px;
+    min-width: 10px;
+    background-color: tomato;
+    border-radius: 50%;
+    left: 85px;
+    top: -2px;
+}
