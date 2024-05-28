@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 function Navbar() {
 
   const [menu, setMenu] = useState("Home")
+  const base_name = "/food-app-modified-for-backend/";
   return (
     <>
       <header className="navbar">
-        <Link to="/"><img src={assets.logo} alt="logo" /></Link>
+        <Link to={`${base_name}`}><img src={assets.logo} alt="logo" /></Link>
         <ul className="list-items">
           <a onClick={()=>setMenu("Home")} href="#home"><li className={menu==="Home"?"active":""}>Home</li></a>
           <a onClick={()=>setMenu("about")} href="#home"><li className={menu==="about"?"active":""}>About</li></a>
@@ -18,7 +19,7 @@ function Navbar() {
         </ul> 
         <div className="icons">
           <img src={assets.search_icon} />
-          <Link to="/cart"><img className="basket" src={assets.basket_icon} /></Link>
+          <Link to={`${base_name}cart`}><img className="basket" src={assets.basket_icon} /></Link>
           <div className="dot"></div>
           <button>Login</button>
           {/* <img src={assets.profile_icon} /> */}
