@@ -26,40 +26,39 @@ function Cart() {
   }, [cartItems, food_list]);
 
   const itemNames = Object.keys(cartItems)
-  .map((itemId) => {
-    const item = food_list.find((item) => item.id == itemId);
-    if (item) {
-      return {
-        item: item.name,
-        quantity: cartItems[itemId],
-        item_price: item.price,
-        price: item.price * cartItems[itemId],
-      };
-    }
-  })
-  .filter((item) => item);
-
+    .map((itemId) => {
+      const item = food_list.find((item) => item.id == itemId);
+      if (item) {
+        return {
+          item: item.name,
+          quantity: cartItems[itemId],
+          item_price: item.price,
+          price: item.price * cartItems[itemId],
+        };
+      }
+    })
+    .filter((item) => item);
 
   const submitData = () => {
-    if (total>0){
-    const fetchData = async () => {
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(itemNames),
+    if (total > 0) {
+      const fetchData = async () => {
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(itemNames),
+        };
+        const response = await fetch(
+          "http://localhost:8000/api/cartData/",
+          options
+        );
+        const jsonData = await response.json();
+        setResult(jsonData);
       };
-      const response = await fetch(
-        "http://localhost:8000/api/cartData/",
-        options
-      );
-      const jsonData = await response.json();
-      setResult(jsonData);
-    };
-    fetchData();
-  }
-}
+      fetchData();
+    }
+  };
   console.log(food_list);
   console.log(result);
 
