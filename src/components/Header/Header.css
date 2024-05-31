@@ -1,10 +1,9 @@
 .header {
     display: flex;
-    /* flex-direction: column; */
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
-    margin-top: 70px;
-
+    margin-top: 50px;
 }
 
 
@@ -13,10 +12,8 @@
     background-repeat: no-repeat;
     height: 70vh;
     width: 80vw;
-    background-size:cover;
+    background-size: contain;
     position: relative;
-    align-items: center;
-    border-radius: 20px;
 }
 .header-content{
     position: absolute;
