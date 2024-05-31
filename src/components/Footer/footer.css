@@ -1,0 +1,46 @@
+.footer{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    background-color: black;
+    color: white;
+    padding: 40px 80px;
+}
+.foot-left{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 500px;
+}
+.logo{
+    max-width: 300px;
+    cursor: pointer;
+}
+.foot-soc{
+    display: flex;
+    gap: 2rem;
+    
+}
+.foot-soc img{
+    cursor: pointer;
+}
+.foot-center {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.foot-center li,
+.foot-right section p{
+    margin: 20px;
+    cursor: pointer;
+}
+.foot-right{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+}
+.foot-center h2,
+.foot-right h2{
+    font-size: xx-large;
+}

@@ -1,0 +1,19 @@
+.d-c{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 90px;
+    margin-bottom: 90px;
+    gap: 3rem;
+}
+.d-c h1{
+    text-align: center;
+}
+.images-sec{
+    display: flex;
+    gap: 3rem;
+}
+.images-sec img{
+    cursor: pointer;
+}

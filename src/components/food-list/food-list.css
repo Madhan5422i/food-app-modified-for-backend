@@ -1,0 +1,143 @@
+/*.food-list-heading{
+    margin-top: 40px;
+}
+.food-list-component{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem 1rem;
+    justify-content: space-evenly;
+    margin-top: 40px;
+}
+
+.food-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.827); 
+
+}
+.whole{
+    padding: 20px;
+}
+.food-list img{
+    width: 100%;
+    height: 100%;
+    max-height: 250px;
+    object-fit: cover;
+}
+
+.food-name .rating{
+    width: 100px;
+    height: 20px;
+}
+.food-name{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.food-details{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.food-details span{
+    color: tomato;
+    font-size: 25px;
+    font-weight: 800;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.food-list-component .food-details{
+    align-items: baseline;
+}*/
+
+@import url('https://fonts.googleapis.com/css2?family=Jaini+Purva&family=Outfit&family=Poetsen+One&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+.food-list-heading{
+    margin-top: 40px;
+}
+.food-list-component{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+.food-list{
+    display: flex;
+    flex-direction: column;
+    max-width: 290px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.278); 
+    border-radius: 20px;
+    overflow: hidden;
+    /* cursor: pointer; */
+    justify-content: space-between;
+    transition: scale 0.2s;
+    position: relative;
+}
+.food-name-rating{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    gap: 2rem;
+    font-family: Outfit;
+    font-size: small;
+}
+.food-name-rating img{
+    width: 90px;
+    height: 20px;
+}
+.food-details{
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: JainiPurv;
+}
+.food-list-component .food-details h3{
+    color: tomato;
+    font-weight: 800;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.food-list:hover{
+    scale: 1.01;
+}
+
+
+.count-buttons-container{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.when-active{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 0.5rem;
+    align-items: center;
+    position: absolute;
+    top: 170px;
+    right: 10px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 50px;
+    font-weight: 800;
+    
+}
+.when-active img{
+    cursor: pointer;
+}
+.when-single{
+    position: absolute;
+    top: 170px;
+    right: 5px;
+    
+}
+.when-single img{
+    width: 45px;
+    cursor: pointer;
+}
