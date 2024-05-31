@@ -1,9 +1,5 @@
 /* eslint-disable react/prop-types */
-<<<<<<< HEAD
 import { createContext, useState,useEffect } from "react";
-=======
-import { createContext, useState } from "react";
->>>>>>> refs/remotes/origin/main
 
 export const StoreContext = createContext(null);
 
@@ -32,7 +28,6 @@ const deleteCartItem = (itemId) => {
       return newCartItems;
     });
   }
-<<<<<<< HEAD
 
   
 };
@@ -46,21 +41,14 @@ useEffect(() => {
   };
   fetchData();
 }, []);
-=======
-};
->>>>>>> refs/remotes/origin/main
 
   const contextValue = {
     cartItems,
     setcartItems,
     addToCart,
     removrFromCart,
-<<<<<<< HEAD
     deleteCartItem,
     food_list
-=======
-    deleteCartItem
->>>>>>> refs/remotes/origin/main
   };
   return (
     <StoreContext.Provider value={contextValue}>

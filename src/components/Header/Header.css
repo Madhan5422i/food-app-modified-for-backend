@@ -12,8 +12,9 @@
     background-repeat: no-repeat;
     height: 70vh;
     width: 80vw;
-    background-size: contain;
+    background-size: cover;
     position: relative;
+    border-radius: 20px;
 }
 .header-content{
     position: absolute;
