@@ -14,11 +14,17 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  const removrFromCart = (itemId) => {
-    if (cartItems[itemId] && cartItems[itemId] > 0) {
-      setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    }
-  };
+const removrFromCart = (itemId) => {
+  if (cartItems[itemId] && cartItems[itemId] > 1) {
+    setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+  } else if (cartItems[itemId] && cartItems[itemId] === 1) {
+    setcartItems((prev) => {
+      const newCartItems = { ...prev };
+      delete newCartItems[itemId];
+      return newCartItems;
+    });
+  }
+};
 
 const deleteCartItem = (itemId) => {
   if (cartItems[itemId]) {
