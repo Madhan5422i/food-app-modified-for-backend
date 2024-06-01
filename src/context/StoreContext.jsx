@@ -1,13 +1,21 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState,useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setcartItems] = useState({});
+  const [auth, setAuth] = useState(false);
+
+
+  const checkAuth=(status)=>{
+    if(status==="success"){
+      setAuth(true)
+    }
+  }
 
   const addToCart = (itemId) => {
-    itemId = Number(itemId)
+    itemId = Number(itemId);
     if (!cartItems[itemId]) {
       setcartItems((prev) => ({ ...prev, [itemId]: 1 }));
     } else {
@@ -15,41 +23,41 @@ const StoreContextProvider = (props) => {
     }
   };
 
-const removrFromCart = (itemId) => {
-  itemId = Number(itemId)
-  if (cartItems[itemId] && cartItems[itemId] > 1) {
-    setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-  } else if (cartItems[itemId] && cartItems[itemId] === 1) {
-    setcartItems((prev) => {
-      const newCartItems = { ...prev };
-      delete newCartItems[itemId];
-      return newCartItems;
-    });
-  }
-};
-
-const deleteCartItem = (itemId) => {
-  itemId = Number(itemId)
-  if (cartItems[itemId]) {
-    setcartItems((prev) => {
-      const newCartItems = { ...prev };
-      delete newCartItems[itemId];
-      return newCartItems;
-    });
-  }
-
-  
-};
-const [food_list, setfood_list] = useState();
-
-useEffect(() => {
-  const fetchData = async () => {
-    const response = await fetch("http://localhost:8000/api/itemList/");
-    const jsonData = await response.json();
-    setfood_list(jsonData);
+  const removrFromCart = (itemId) => {
+    itemId = Number(itemId);
+    if (cartItems[itemId] && cartItems[itemId] > 1) {
+      setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    } else if (cartItems[itemId] && cartItems[itemId] === 1) {
+      setcartItems((prev) => {
+        const newCartItems = { ...prev };
+        delete newCartItems[itemId];
+        return newCartItems;
+      });
+    }
   };
-  fetchData();
-}, []);
+
+  const deleteCartItem = (itemId) => {
+    itemId = Number(itemId);
+    if (cartItems[itemId]) {
+      setcartItems((prev) => {
+        const newCartItems = { ...prev };
+        delete newCartItems[itemId];
+        return newCartItems;
+      });
+    }
+  };
+  const [food_list, setfood_list] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:8000/api/itemList/");
+      const jsonData = await response.json();
+      setfood_list(jsonData);
+    };
+    fetchData();
+  }, []);
+
+  console.log(auth)
 
   const contextValue = {
     cartItems,
@@ -57,7 +65,10 @@ useEffect(() => {
     addToCart,
     removrFromCart,
     deleteCartItem,
-    food_list
+    food_list,
+    auth,
+    setAuth,
+    checkAuth
   };
   return (
     <StoreContext.Provider value={contextValue}>
