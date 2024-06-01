@@ -7,6 +7,7 @@ const StoreContextProvider = (props) => {
   const [cartItems, setcartItems] = useState({});
 
   const addToCart = (itemId) => {
+    itemId = Number(itemId)
     if (!cartItems[itemId]) {
       setcartItems((prev) => ({ ...prev, [itemId]: 1 }));
     } else {
@@ -15,6 +16,7 @@ const StoreContextProvider = (props) => {
   };
 
 const removrFromCart = (itemId) => {
+  itemId = Number(itemId)
   if (cartItems[itemId] && cartItems[itemId] > 1) {
     setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
   } else if (cartItems[itemId] && cartItems[itemId] === 1) {
@@ -27,6 +29,7 @@ const removrFromCart = (itemId) => {
 };
 
 const deleteCartItem = (itemId) => {
+  itemId = Number(itemId)
   if (cartItems[itemId]) {
     setcartItems((prev) => {
       const newCartItems = { ...prev };
