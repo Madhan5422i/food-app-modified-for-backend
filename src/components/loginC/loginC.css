@@ -1,0 +1,104 @@
+.bodyl {
+    background-image: url('./pexels-punchbrandstock-2090903.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(4px);
+    
+}
+.parent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+.bodyl a{
+    color: tomato;
+}
+.main{
+    display: flex;
+    box-shadow: 0px 0px 6px 0px rgba(92, 60, 60, 0.827); 
+    border-radius: 20px;
+    padding-left: 30px;
+    background-color: rgb(236, 234, 230);
+    padding-top: 20px;
+}
+
+.one{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 2rem;
+    justify-content: center;
+}
+.bodyl form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.bodyl form input{
+    padding: 10px;
+    padding-left: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    border: none;
+    background-color: rgba(128, 128, 128, 0.34);
+    border-radius: 10px;
+    /* width: 100%; */
+}
+
+.bodyl form input:focus{
+    outline: none;
+}
+.login-txt h1{
+    font-size: 2rem;
+    font-weight: 900;
+    color: #333;
+}
+.login-txt p{
+    display: flex;
+    gap: 0.1rem;
+}
+.remember-txt{
+    display: flex;
+    gap: 6rem;
+    
+
+}
+.check{
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+.check input{
+    cursor: pointer;
+}
+.body button{
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    border: none;
+    background-color: tomato;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+.email-cont,.pass-cont {
+    position: relative;
+}
+.email-cont input,.pass-cont input{
+    width: 100%;
+}
+.email,.pass{
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    color: black;
+}
+.eye{
+    position: absolute;
+    right: 9px;
+    top: 14px;
+    cursor: pointer;
+}

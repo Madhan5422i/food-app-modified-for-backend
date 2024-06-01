@@ -38,6 +38,7 @@ function Cart() {
       }
     })
     .filter((item) => item);
+    console.log(itemNames)
 
   const submitData = () => {
     if (total > 0) {
