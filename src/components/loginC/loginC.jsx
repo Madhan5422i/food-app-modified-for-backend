@@ -1,22 +1,22 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { assets } from "../../assets/assets";
 import "./loginC.css";
-// import { assets } from "/src/assets/assets.js";
 import { MdEmail, MdLock, MdVisibility, MdVisibilityOff } from "react-icons/md";
-// eslint-disable-next-line no-unused-vars
 import CircularProgress from "@mui/material/CircularProgress";
 import { StoreContext } from "../../context/StoreContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function LoginComponent() {
-  const { auth, setAuth, checkAuth } = useContext(StoreContext);
+  const { auth, setAuth } = useContext(StoreContext);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const base_name = "/food-app-modified-for-backend/";
 
   function toggleB() {
     setShowPassword(!showPassword);
@@ -25,49 +25,41 @@ function LoginComponent() {
   function submitData(event) {
     setLoading(true);
     event.preventDefault();
-    function getCsrfToken() {
-      let cookies = document.cookie.split(";");
-      for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        let [name, value] = cookie.split("=");
-        if (name === "csrftoken") {
-          return value;
-        }
-      }
-      return null;
-    }
-    let csrftoken = getCsrfToken();
+
+    const csrftoken = Cookies.get("csrftoken"); // Get CSRF token from cookies
 
     const fetchData = async () => {
-      const response = await fetch("http://localhost:8000/api/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrftoken,
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      try {
+        const response = await fetch("http://localhost:8000/api/login/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          credentials: "include", // Include credentials in request
+          body: JSON.stringify({ email, password }),
+        });
 
-      const data = await response.json();
-      setResult(data);
-      setLoading(false);
+        if (response.ok) {
+          const data = await response.json();
+          setAuth(data.isAuthenticated); // Set auth to true if login is successful
+          if (data.isAuthenticated) {
+            navigate(base_name); // Redirect to homepage
+          }
+        } else {
+          setAuth(false); // Set auth to false if login fails
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        setAuth(false); // Set auth to false if an error occurs
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
   }
-
-  const base_name = "/food-app-modified-for-backend/";
-  const navigate = useNavigate();
-  useEffect(() => {
-    checkAuth(result);
-    if (auth) {
-      navigate(base_name); // Redirect to homepage
-    }
-  }, [result, checkAuth, auth, navigate,base_name]);
-
-  console.log(result);
-  console.log(auth);
-  console.log(base_name)
+console.log(auth)
   return (
     <div className="bodyl">
       <div className="parent">

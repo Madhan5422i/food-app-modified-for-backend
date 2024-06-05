@@ -7,12 +7,29 @@ const StoreContextProvider = (props) => {
   const [cartItems, setcartItems] = useState({});
   const [auth, setAuth] = useState(false);
 
-
-  const checkAuth=(status)=>{
-    if(status==="success"){
-      setAuth(true)
+  const checkAuth = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/checkAuth/', {
+        credentials: 'include'  // Include credentials in request
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data.isAuthenticated;
+      } else {
+        return false; // User is not authenticated
+      }
+    } catch (error) {
+      console.error('Error checking authentication:', error);
+      return false; // User is not authenticated
     }
   }
+
+  useEffect(() => {
+    (async () => {
+      const authenticated = await checkAuth();
+      setAuth(authenticated);
+    })();
+  }, []);
 
   const addToCart = (itemId) => {
     itemId = Number(itemId);
@@ -56,8 +73,6 @@ const StoreContextProvider = (props) => {
     };
     fetchData();
   }, []);
-
-  console.log(auth)
 
   const contextValue = {
     cartItems,
