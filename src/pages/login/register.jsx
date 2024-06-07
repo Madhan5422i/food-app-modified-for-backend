@@ -1,9 +1,9 @@
-import LoginComponent from "./../../components/loginC/loginC";
 import { useContext, useEffect } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import RegisterC from './../../components/Register/Register';
 
-function Login() {
+function Register() {
   const { auth } = useContext(StoreContext);
   const navigate = useNavigate();
   const base_name = "/food-app-modified-for-backend/";
@@ -14,8 +14,8 @@ function Login() {
     }
   }, [auth, navigate, base_name]);
 
-  return <>{!auth && <LoginComponent />}</>;
+  return <>{!auth && <RegisterC />}</>;
 
 }
 
-export default Login;
+export default Register;

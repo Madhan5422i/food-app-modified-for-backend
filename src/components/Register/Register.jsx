@@ -1,24 +1,22 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import { useContext, createContext, useState } from "react";
-import { assets } from "../../assets/assets";
-import "./loginC.css";
+import "./register.css";
+import { useContext, useState } from "react";
 import { MdEmail, MdLock, MdVisibility, MdVisibilityOff } from "react-icons/md";
 import CircularProgress from "@mui/material/CircularProgress";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { assets } from "/src/assets/assets.js";
 
-function LoginComponent() {
+function RegisterC() {
+  // eslint-disable-next-line no-unused-vars
   const { auth, setAuth } = useContext(StoreContext);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const base_name = "/food-app-modified-for-backend/";
-
-
 
   function toggleB() {
     setShowPassword(!showPassword);
@@ -32,14 +30,14 @@ function LoginComponent() {
 
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/login/", {
+        const response = await fetch("http://localhost:8000/api/register/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             "X-CSRFToken": csrftoken,
           },
           credentials: "include", // Include credentials in request
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ email, password1,password2 }),
         });
 
         if (response.ok) {
@@ -61,21 +59,21 @@ function LoginComponent() {
 
     fetchData();
   }
-  console.log(auth);
   return (
-      <div className="bodyl">
-        <div className="parent">
-          <div className="main">
-            <div className="one">
-              <div className="login-txt">
-                <h1>Login</h1>
+    <>
+      <div className="signup-body">
+        <div className="signup-parent">
+          <div className="signup-main">
+            <div className="signup-section">
+              <div className="signup-text">
+                <h1>Sign up</h1>
                 <p>
-                  Don&apos;t have an account?<a href="#">Sign up</a>
+                  Already have an account?<a href="#">Login</a>
                 </p>
               </div>
               <form method="post" onSubmit={(e) => submitData(e)}>
-                <div className="email-cont">
-                  <MdEmail className="email" />
+                <div className="signup-email-container">
+                  <MdEmail className="signup-email-icon" />
                   <input
                     type="email"
                     required
@@ -84,49 +82,57 @@ function LoginComponent() {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div className="pass-cont">
-                  <MdLock className="pass" />
+                <div className="signup-password-container">
+                  <MdLock className="signup-password-icon" />
                   <input
                     type={showPassword ? "text" : "password"}
                     required
                     placeholder="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={password1}
+                    onChange={(e) => setPassword1(e.target.value)}
                   />
                   {showPassword ? (
-                    <MdVisibilityOff onClick={toggleB} className="eye" />
+                    <MdVisibilityOff
+                      onClick={toggleB}
+                      className="signup-eye-icon"
+                    />
                   ) : (
-                    <MdVisibility onClick={toggleB} className="eye" />
+                    <MdVisibility
+                      onClick={toggleB}
+                      className="signup-eye-icon"
+                    />
                   )}
                 </div>
-
-                <div className="remember-txt">
-                  <div className="check">
-                    <input type="checkbox" name="Remember me" />
-                    <label htmlFor="Remember me">Remember me</label>
-                  </div>
-                  <a href="#">Forgot Password ?</a>
+                <div className="signup-password-container">
+                  <MdLock className="signup-password-icon" />
+                  <input
+                    type="password"
+                    required
+                    placeholder="Confirm Password"
+                    value={password2}
+                    onChange={(e) => setPassword2(e.target.value)}
+                  />
                 </div>
                 {loading ? (
-                  <div className="loading-c">
+                  <div className="signup-loading-container">
                     <CircularProgress
                       style={{ color: "tomato", animationDuration: "10s" }}
                       size={30}
                     />
                   </div>
                 ) : (
-                  <button type="submit">Login</button>
+                  <button type="submit">Sign up</button>
                 )}
               </form>
             </div>
             <div>
-              <img className="image" src={assets.loginphoto} alt="google" />
+              <img className="signup-image" src={assets.illu} alt="google" />
             </div>
-            {auth ? <p>logged</p> : <p>not logged</p>}
           </div>
         </div>
       </div>
+    </>
   );
 }
 
-export default LoginComponent;
+export default RegisterC;

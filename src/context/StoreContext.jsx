@@ -4,87 +4,100 @@ import { createContext, useState, useEffect } from "react";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-  const [cartItems, setcartItems] = useState({});
+  const [cartItems, setCartItems] = useState({});
   const [auth, setAuth] = useState(false);
+  const [detail, setDetail] = useState({});
 
   const checkAuth = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/checkAuth/', {
-        credentials: 'include'  // Include credentials in request
+      const response = await fetch("http://localhost:8000/api/checkAuth/", {
+        credentials: "include",
       });
       if (response.ok) {
         const data = await response.json();
-        return data.isAuthenticated;
+        setDetail(data.data);
+        console.log(data.data)
+        setAuth(data.isAuthenticated);
+        return (data.isAuthenticated,data.data);
       } else {
-        return false; // User is not authenticated
+        setAuth(false);
+        setDetail({});
+        return false;
       }
     } catch (error) {
-      console.error('Error checking authentication:', error);
-      return false; // User is not authenticated
-    }
-  }
-
-  useEffect(() => {
-    (async () => {
-      const authenticated = await checkAuth();
-      setAuth(authenticated);
-    })();
-  }, []);
-
-  const addToCart = (itemId) => {
-    itemId = Number(itemId);
-    if (!cartItems[itemId]) {
-      setcartItems((prev) => ({ ...prev, [itemId]: 1 }));
-    } else {
-      setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+      console.error("Error checking authentication:", error);
+      setAuth(false);
+      setDetail({});
+      return false;
     }
   };
 
-  const removrFromCart = (itemId) => {
+
+  
+
+  useEffect(() => {
+    (async () => {
+      await checkAuth();
+    })();
+  }, []);
+
+// console.log(checkAuth())
+
+  const addToCart = (itemId) => {
     itemId = Number(itemId);
-    if (cartItems[itemId] && cartItems[itemId] > 1) {
-      setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    } else if (cartItems[itemId] && cartItems[itemId] === 1) {
-      setcartItems((prev) => {
-        const newCartItems = { ...prev };
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: (prev[itemId] || 0) + 1,
+    }));
+  };
+
+  const removeFromCart = (itemId) => {
+    itemId = Number(itemId);
+    setCartItems((prev) => {
+      const newCartItems = { ...prev };
+      if (newCartItems[itemId] > 1) {
+        newCartItems[itemId] -= 1;
+      } else {
         delete newCartItems[itemId];
-        return newCartItems;
-      });
-    }
+      }
+      return newCartItems;
+    });
   };
 
   const deleteCartItem = (itemId) => {
     itemId = Number(itemId);
-    if (cartItems[itemId]) {
-      setcartItems((prev) => {
-        const newCartItems = { ...prev };
-        delete newCartItems[itemId];
-        return newCartItems;
-      });
-    }
+    setCartItems((prev) => {
+      const newCartItems = { ...prev };
+      delete newCartItems[itemId];
+      return newCartItems;
+    });
   };
-  const [food_list, setfood_list] = useState();
+
+  const [foodList, setFoodList] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:8000/api/itemList/");
       const jsonData = await response.json();
-      setfood_list(jsonData);
+      setFoodList(jsonData);
     };
     fetchData();
   }, []);
 
   const contextValue = {
     cartItems,
-    setcartItems,
+    setCartItems,
     addToCart,
-    removrFromCart,
+    removeFromCart,
     deleteCartItem,
-    food_list,
+    foodList,
     auth,
     setAuth,
-    checkAuth
+    checkAuth,
+    detail,
+    setDetail,
   };
+
   return (
     <StoreContext.Provider value={contextValue}>
       {props.children}
