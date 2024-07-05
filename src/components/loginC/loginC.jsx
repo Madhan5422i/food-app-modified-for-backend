@@ -15,6 +15,7 @@ function LoginComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [check, setCheck] = useState(false);
   const navigate = useNavigate();
   const base_name = "/food-app-modified-for-backend/";
 
@@ -23,6 +24,11 @@ function LoginComponent() {
   function toggleB() {
     setShowPassword(!showPassword);
   }
+
+  function toggleCheck() {
+    setCheck(!check);
+  }
+  console.log(check);
 
   function submitData(event) {
     setLoading(true);
@@ -39,7 +45,7 @@ function LoginComponent() {
             "X-CSRFToken": csrftoken,
           },
           credentials: "include", // Include credentials in request
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ email, password,check }),
         });
 
         if (response.ok) {
@@ -61,7 +67,7 @@ function LoginComponent() {
 
     fetchData();
   }
-  console.log(auth);
+  // console.log(auth);
   return (
       <div className="bodyl">
         <div className="parent">
@@ -70,7 +76,7 @@ function LoginComponent() {
               <div className="login-txt">
                 <h1>Login</h1>
                 <p>
-                  Don&apos;t have an account?<a href="#">Sign up</a>
+                  Don&apos;t have an account?<a href={`${base_name}register`}>Sign up</a>
                 </p>
               </div>
               <form method="post" onSubmit={(e) => submitData(e)}>
@@ -102,7 +108,7 @@ function LoginComponent() {
 
                 <div className="remember-txt">
                   <div className="check">
-                    <input type="checkbox" name="Remember me" />
+                    <input type="checkbox" name="Remember me" onClick={()=>toggleCheck()} value={check} />
                     <label htmlFor="Remember me">Remember me</label>
                   </div>
                   <a href="#">Forgot Password ?</a>

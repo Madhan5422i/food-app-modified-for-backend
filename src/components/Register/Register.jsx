@@ -15,6 +15,7 @@ function RegisterC() {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [loading, setLoading] = useState(false);
+  const [err,setErr] = useState()
   const navigate = useNavigate();
   const base_name = "/food-app-modified-for-backend/";
 
@@ -37,20 +38,27 @@ function RegisterC() {
             "X-CSRFToken": csrftoken,
           },
           credentials: "include", // Include credentials in request
-          body: JSON.stringify({ email, password1,password2 }),
+          body: JSON.stringify({ email, password1, password2 }),
         });
 
         if (response.ok) {
           const data = await response.json();
-          setAuth(data.isAuthenticated); // Set auth to true if login is successful
+          setAuth(data.isAuthenticated);
+          console.log(response); // Set auth to true if login is successful
           if (data.isAuthenticated) {
             navigate(base_name); // Redirect to homepage
           }
-        } else {
-          setAuth(false); // Set auth to false if login fails
+        } else if (response.status === 400) {
+          setAuth(false);
+          const data = await response.json();
+          const firstKey = Object.keys(data)[0]; // Get the first property name
+          if (firstKey) {
+            setErr(data[firstKey][0])
+            console.log(data[firstKey][0]); // Log the first error message of the first property
+          }
         }
       } catch (error) {
-        console.error("Error during login:", error);
+        console.log("Error during login:", error);
         setAuth(false); // Set auth to false if an error occurs
       } finally {
         setLoading(false);
@@ -59,6 +67,7 @@ function RegisterC() {
 
     fetchData();
   }
+
   return (
     <>
       <div className="signup-body">
@@ -68,7 +77,7 @@ function RegisterC() {
               <div className="signup-text">
                 <h1>Sign up</h1>
                 <p>
-                  Already have an account?<a href="#">Login</a>
+                  Already have an account?<a href={`${base_name}login`}>Login</a>
                 </p>
               </div>
               <form method="post" onSubmit={(e) => submitData(e)}>
@@ -107,12 +116,15 @@ function RegisterC() {
                   <MdLock className="signup-password-icon" />
                   <input
                     type="password"
+                    // eslint-disable-next-line react/no-unknown-property
+                    suggested="current-password"
                     required
                     placeholder="Confirm Password"
                     value={password2}
                     onChange={(e) => setPassword2(e.target.value)}
                   />
                 </div>
+                <p>{err}</p>
                 {loading ? (
                   <div className="signup-loading-container">
                     <CircularProgress

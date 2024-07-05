@@ -1,0 +1,76 @@
+
+.inpt-1{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.inpt-2{
+    display: flex;
+    justify-content: space-between;
+}
+
+.inpt{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.input-section{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.btn-ctn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-top: 50px; */
+}
+.addrs-btn{
+    display: flex;
+    gap: 1rem;
+    
+}
+.addrs-btn button{
+    background-color: aqua;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    color: black;
+    background-color:transparent;
+    border: 2px solid black;
+    transition: all 0.2s ease-in-out;
+}
+.u-button{
+    background-color: tomato;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+
+}
+.addr-sec h1{
+    font-size: x-large;
+}
+.input-section input{
+    border: 2px solid rgba(128, 128, 128, 0.493);
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+input:focus {
+    outline: none;
+    border: 2px solid tomato;
+}
+input:hover{
+    border: 2px solid black;
+}
+.addrs-btn button:hover{
+    background-color: black;
+    color: white;
+}
+.input-section label{
+    font-size: 1rem;
+    color: grey;
+}

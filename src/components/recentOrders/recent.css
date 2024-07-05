@@ -1,0 +1,14 @@
+.boxe{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-left: 50px;
+}
+.recent-title{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.recent-title h1,.hsi{
+    font-size: 2rem;
+}

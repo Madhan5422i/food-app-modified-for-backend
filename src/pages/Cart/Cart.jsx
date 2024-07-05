@@ -25,6 +25,9 @@ function Cart() {
     setneTotal(netotal);
   }, [cartItems, food_list]);
 
+  console.log("cartItems", cartItems);
+  console.log("food_list", food_list);
+
   const itemNames = Object.keys(cartItems)
     .map((itemId) => {
       const item = food_list.find((item) => item.id == itemId);

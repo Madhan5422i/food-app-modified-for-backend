@@ -1,18 +1,56 @@
+/* eslint-disable no-unused-vars */
 import { assets } from "/src/assets/assets.js";
-import { useContext, useState,useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
+import Cookies from "js-cookie";
 
 function Navbar() {
-  const { auth, detail,checkAuth } = useContext(StoreContext);
+  const { auth, detail, checkAuth } = useContext(StoreContext);
   const [menu, setMenu] = useState("Home");
+  const navigate = useNavigate();
   const base_name = "/food-app-modified-for-backend/";
+  const [result, setResult] = useState();
 
-  useEffect(()=>{
-    checkAuth()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  useEffect(() => {
+    checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const logout = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    const csrftoken = Cookies.get("csrftoken");
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      credentials: "include", // Include credentials in request
+    };
+    const submitData = async () => {
+      console.log(auth);
+      if (auth) {
+        const response = await fetch(
+          "http://localhost:8000/api/logout/",
+          options
+        );
+        const data = await response.json();
+        if (response.ok) {
+          setResult(data);
+          navigate(base_name);
+          window.location.reload();
+        } else {
+          console.log("not ok");
+        }
+      } else {
+        console.log("not auth");
+      }
+    };
+    submitData();
+  };
 
   return (
     <header className="navbar">
@@ -40,14 +78,24 @@ function Navbar() {
         </Link>
         <div className="dot"></div>
         {auth ? (
-          <div>
-            <img src={assets.profile_icon} />
-            {detail && <p>{detail.email}</p>}
-          </div>
+          <>
+            <div className="det-con">
+              <Link to={`${base_name}profile`}>
+                <img src={assets.profile_icon} />
+              </Link>
+
+              {detail && <p className="name">{detail.email}</p>}
+            </div>
+            <form onSubmit={(e) => logout(e)}>
+              <button type="submit">Logout</button>
+            </form>
+          </>
         ) : (
-          <Link to={`${base_name}login`}>
-            <button>Login</button>
-          </Link>
+          <div>
+            <Link to={`${base_name}login`}>
+              <button>Login</button>
+            </Link>
+          </div>
         )}
       </div>
     </header>

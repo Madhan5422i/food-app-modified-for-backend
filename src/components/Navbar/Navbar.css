@@ -47,3 +47,12 @@
     left: 85px;
     top: -2px;
 }
+
+.det-con{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.name{
+    font-size: small;
+}

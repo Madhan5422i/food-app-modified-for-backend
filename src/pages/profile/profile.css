@@ -1,0 +1,60 @@
+.main-section{
+  display: flex;
+}
+
+.nav-sec {
+  height: 100vh;
+  background-color: tomato;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-top: 30px;
+  color: white;
+  flex: 0 0 300px;
+}
+.things {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.logi {
+  display: flex;
+  justify-content: center;
+}
+
+.thing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  min-height: 50px;
+  border-radius: 40px 0px 0px 40px;
+  cursor: pointer;
+}
+.thing h1{
+  width: 100px;
+}
+.icon-container {
+  display: flex;
+}
+
+.active{
+  color: black;
+  cursor: pointer;
+  background-color: white
+}
+.box2{
+  padding-top: 50px;
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+}
+.rights{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
