@@ -1,7 +1,17 @@
-import { useEffect } from "react";
-import { assets } from './../../assets/assets';
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
+import { assets } from "./../../assets/assets";
+import UserInfo from "./../../components/userInfo/userinfo";
+import "./payment.css";
+
+import { useItemNames } from "../../context/StoreContext";
+import Pay from './../../components/pay/pay';
 
 function Payment() {
+  const { itemNames } = useItemNames();
+  const [result, setResult] = useState([]);
+  const [amount, setAmount] = useState(0);
+
   useEffect(() => {
     loadRazorpayScript("https://checkout.razorpay.com/v1/checkout.js")
       .then((loaded) => {
@@ -22,7 +32,41 @@ function Payment() {
     });
   }
 
-  async function displayRazorpay() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:8000/api/payment");
+      if (!response.ok) {
+        alert("Server error. Please check if you are online.");
+        return;
+      }
+      else {
+        const {amount}= await response.json();
+        setAmount(amount);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const DisplayRazorpay = async () => {
+    
+
+    const fetchData = async () => {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(itemNames),
+      };
+      const response = await fetch(
+        "http://localhost:8000/api/cartData/",
+        options
+      );
+      const jsonData = await response.json();
+      setResult(jsonData);
+    };
+    fetchData();
+
     try {
       const response = await fetch("http://127.0.0.1:8000/api/payment");
       if (!response.ok) {
@@ -31,7 +75,6 @@ function Payment() {
       }
 
       const { merchantId, amount, currency, orderId } = await response.json();
-
       const options = {
         key: merchantId,
         amount: amount.toString(),
@@ -40,7 +83,7 @@ function Payment() {
         description: "Payment Cart",
         image: assets.illu,
         order_id: orderId,
-        callback_url: "http://127.0.0.1:8000/api",
+        callback_url: "http://127.0.0.1:8000/api/postinfo/",
         redirect: true,
         prefill: {
           name: "Swapnil Pawar",
@@ -61,15 +104,15 @@ function Payment() {
       console.error("An error occurred:", error);
       alert("An error occurred. Please try again.");
     }
-  }
+  };
 
   return (
-    <div className="App">
+    <div className="Appi">
       <header className="App-header">
-        <p>Buy React now!</p>
-        <button className="App-link" onClick={displayRazorpay}>
-          Pay ₹500
-        </button>
+        <div className="usif">
+          <UserInfo />
+        </div>
+        <Pay amount={amount} onButtonClick={DisplayRazorpay} />
       </header>
     </div>
   );

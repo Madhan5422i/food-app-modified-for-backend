@@ -1,0 +1,12 @@
+.usif{
+    width: 40vw;
+}
+
+.Appi{
+    margin: 40px;
+}
+.App-header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

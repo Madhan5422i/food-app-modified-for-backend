@@ -44,6 +44,8 @@ import food_30 from './food_30.png'
 import food_31 from './food_31.png'
 import food_32 from './food_32.png'
 
+
+import visa from './visa-logo.png'
 import illu from './illu.png'
 import loginphoto from './pngwing.com.png'
 import add_icon_white from './add_icon_white.png'
@@ -61,6 +63,8 @@ import profile_icon from './profile_icon.png'
 import bag_icon from './bag_icon.png'
 import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
+import upi from './upi_logo_icon_169316.png'
+import bank from './bank.png'
 
 export const assets = {
     logo,
@@ -83,7 +87,10 @@ export const assets = {
     logout_icon,
     bag_icon,
     parcel_icon,
-    illu
+    illu,
+    visa,
+    upi,
+    bank
 }
 
 export const menu_list = [

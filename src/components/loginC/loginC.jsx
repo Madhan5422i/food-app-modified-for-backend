@@ -18,8 +18,7 @@ function LoginComponent() {
   const [check, setCheck] = useState(false);
   const navigate = useNavigate();
   const base_name = "/food-app-modified-for-backend/";
-
-
+  const [err, setErr] = useState();
 
   function toggleB() {
     setShowPassword(!showPassword);
@@ -45,19 +44,25 @@ function LoginComponent() {
             "X-CSRFToken": csrftoken,
           },
           credentials: "include", // Include credentials in request
-          body: JSON.stringify({ email, password,check }),
+          body: JSON.stringify({ email, password, check }),
         });
 
         if (response.ok) {
           const data = await response.json();
-          setAuth(data.isAuthenticated); // Set auth to true if login is successful
+          setAuth(data.isAuthenticated); 
           if (data.isAuthenticated) {
-            navigate(base_name); // Redirect to homepage
+            navigate(base_name);
           }
-        } else {
-          setAuth(false); // Set auth to false if login fails
+        } else if (response.status === 400) {
+          const data = await response.json();
+          const firstKey = Object.keys(data)[0]; 
+          if (firstKey) {
+            setErr(data[firstKey][0]);
+            console.log(data[firstKey][0]);
+          }
         }
       } catch (error) {
+        setErr(error);
         console.error("Error during login:", error);
         setAuth(false); // Set auth to false if an error occurs
       } finally {
@@ -69,69 +74,76 @@ function LoginComponent() {
   }
   // console.log(auth);
   return (
-      <div className="bodyl">
-        <div className="parent">
-          <div className="main">
-            <div className="one">
-              <div className="login-txt">
-                <h1>Login</h1>
-                <p>
-                  Don&apos;t have an account?<a href={`${base_name}register`}>Sign up</a>
-                </p>
+    <div className="bodyl">
+      <div className="parent">
+        <div className="main">
+          <div className="one">
+            <div className="login-txt">
+              <h1>Login</h1>
+              <p>
+                Don&apos;t have an account?
+                <a href={`${base_name}register`}>Sign up</a>
+              </p>
+            </div>
+            <form method="post" onSubmit={(e) => submitData(e)}>
+              <div className="email-cont">
+                <MdEmail className="email" />
+                <input
+                  type="email"
+                  required
+                  placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
-              <form method="post" onSubmit={(e) => submitData(e)}>
-                <div className="email-cont">
-                  <MdEmail className="email" />
-                  <input
-                    type="email"
-                    required
-                    placeholder="Email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="pass-cont">
-                  <MdLock className="pass" />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    required
-                    placeholder="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  {showPassword ? (
-                    <MdVisibilityOff onClick={toggleB} className="eye" />
-                  ) : (
-                    <MdVisibility onClick={toggleB} className="eye" />
-                  )}
-                </div>
-
-                <div className="remember-txt">
-                  <div className="check">
-                    <input type="checkbox" name="Remember me" onClick={()=>toggleCheck()} value={check} />
-                    <label htmlFor="Remember me">Remember me</label>
-                  </div>
-                  <a href="#">Forgot Password ?</a>
-                </div>
-                {loading ? (
-                  <div className="loading-c">
-                    <CircularProgress
-                      style={{ color: "tomato", animationDuration: "10s" }}
-                      size={30}
-                    />
-                  </div>
+              <div className="pass-cont">
+                <MdLock className="pass" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  placeholder="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {showPassword ? (
+                  <MdVisibilityOff onClick={toggleB} className="eye" />
                 ) : (
-                  <button type="submit">Login</button>
+                  <MdVisibility onClick={toggleB} className="eye" />
                 )}
-              </form>
-            </div>
-            <div>
-              <img className="image" src={assets.loginphoto} alt="google" />
-            </div>
-            {auth ? <p>logged</p> : <p>not logged</p>}
+              </div>
+
+              <div className="remember-txt">
+                <div className="check">
+                  <input
+                    type="checkbox"
+                    name="Remember me"
+                    onClick={() => toggleCheck()}
+                    value={check}
+                  />
+                  <label htmlFor="Remember me">Remember me</label>
+                </div>
+                <a href="#">Forgot Password ?</a>
+              </div>
+              <p>{err}</p>
+              {loading ? (
+                <div className="loading-c">
+                  <CircularProgress
+                    style={{ color: "tomato", animationDuration: "10s" }}
+                    size={30}
+                  />
+                </div>
+              ) : (
+                <button type="submit">Login</button>
+              )}
+            </form>
           </div>
+          <div>
+            <img className="image" src={assets.loginphoto} alt="google" />
+          </div>
+          {auth ? <p>logged</p> : <p>not logged</p>}
         </div>
       </div>
+    </div>
   );
 }
 

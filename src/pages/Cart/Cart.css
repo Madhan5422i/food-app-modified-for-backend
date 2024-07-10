@@ -127,9 +127,15 @@
 .promo button:active{
     background-color: rgba(255, 99, 71, 0.681);
 }
-.promo input:focus{
+.continue .promo input:focus{
     border: none;
     outline: none;
+    
+}
+.continue .promo input:hover{
+    border: none;
+    outline: none;
+    
 }
 .continue-btn{
     padding: 16px 20px;

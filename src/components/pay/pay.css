@@ -1,0 +1,40 @@
+.pay-icons{
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.pay-icons img{
+    width: 190px;
+}
+
+.pay-icons img:nth-child(3){
+    width: 100px;
+}
+
+.pay-info i{
+    color: grey;
+    
+}
+.seperator{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+.seperator :nth-child(2) button{
+    cursor: pointer;
+    padding: 16px 80px;
+    background-color: tomato;
+    font-size: larger;
+    font-weight: 700;
+    color: white;
+    border-radius: 20px;
+}
+
+.boxer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
