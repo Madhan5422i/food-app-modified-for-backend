@@ -10,11 +10,18 @@
     gap: 40px;
     font-size: larger;
     align-items: center;
+    justify-content: center;
 
     
     
 }
-
+.det-con, .det-con img {
+    max-width: 40px;
+    max-height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    object-fit: contain;
+}
 .icons img {
     height: 25px;
 }

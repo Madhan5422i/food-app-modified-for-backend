@@ -81,10 +81,10 @@ function Navbar() {
           <>
             <div className="det-con">
               <Link to={`${base_name}profile`}>
-                <img src={assets.profile_icon} />
+                <img src={`http://localhost:8000${detail.profile_image}`} />
               </Link>
 
-              {detail && <p className="name">{detail.email}</p>}
+              {/* {detail && <p className="name">{detail.email}</p>} */}
             </div>
             <form onSubmit={(e) => logout(e)}>
               <button type="submit">Logout</button>
